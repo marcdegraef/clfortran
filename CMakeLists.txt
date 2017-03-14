@@ -39,6 +39,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
   "Single Directory for all static libraries."
   )
 
+set(CMAKE_Fortran_MODULE_DIRECTORY 
+    ${PROJECT_BINARY_DIR}/include
+    CACHE PATH
+    "Single Directory for all .mod files"
+    )
 
 #Enable use of Solution Folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -63,7 +68,7 @@ set(fotrancl_SRCS
 add_library(clfortran STATIC ${fotrancl_SRCS} )
 target_link_libraries(clfortran ${OpenCL_LIBRARIES})
 
-install(FILES ${CLFortranProj_BINARY_DIR}/clfortran.mod
+install(FILES ${CMAKE_Fortran_MODULE_DIRECTORY}/include/clfortran.mod
 		DESTINATION include
 		COMPONENT Applications)
 
