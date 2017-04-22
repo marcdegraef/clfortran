@@ -68,7 +68,13 @@ set(fotrancl_SRCS
 add_library(clfortran STATIC ${fotrancl_SRCS} )
 target_link_libraries(clfortran ${OpenCL_LIBRARIES})
 
-install(FILES ${CMAKE_Fortran_MODULE_DIRECTORY}/\${CMAKE_INSTALL_CONFIG_NAME}/clfortran.mod
+if(MSVC OR XCODE)
+  set(MOD_PATH "\\\${CMAKE_INSTALL_CONFIG_NAME}")
+else()
+    set(MOD_PATH ".")
+endif()
+
+install(FILES ${CMAKE_Fortran_MODULE_DIRECTORY}/${MOD_PATH}/clfortran.mod
 		DESTINATION include
 		COMPONENT Applications)
 
