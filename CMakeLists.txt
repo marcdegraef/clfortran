@@ -55,11 +55,6 @@ endif()
 
 message(STATUS "OpenCL Install: ${OpenCL_INCLUDE_DIR}")
 
-#include(${CLFortranProj_SOURCE_DIR}/CMake_Configure.cmake)
-
-include_directories(${CLFortranProj_BINARY_DIR})
-include_directories(${OpenCL_INCLUDE_DIRS})
-
 set(fotrancl_SRCS 
 	${CLFortranProj_SOURCE_DIR}/clfortran.f90 
 )
@@ -68,8 +63,11 @@ set(fotrancl_SRCS
 add_library(clfortran STATIC ${fotrancl_SRCS} )
 target_link_libraries(clfortran ${OpenCL_LIBRARIES})
 
+target_include_directories(clfortran PUBLIC ${OpenCL_INCLUDE_DIRS}
+                                     PRIVATE ${CLFortranProj_BINARY_DIR})
+
 if(MSVC_IDE OR XCODE)
-  set(MOD_PATH "\\\${CMAKE_INSTALL_CONFIG_NAME}")
+  set(MOD_PATH "\${CMAKE_INSTALL_CONFIG_NAME}")
 else()
     set(MOD_PATH ".")
 endif()
