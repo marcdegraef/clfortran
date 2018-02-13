@@ -55,6 +55,8 @@ endif()
 
 message(STATUS "OpenCL Install: ${OpenCL_INCLUDE_DIR}")
 
+set ( DEBUG_EXTENSION "_debug" )
+
 set(fotrancl_SRCS 
 	${CLFortranProj_SOURCE_DIR}/clfortran.f90 
 )
@@ -65,6 +67,16 @@ target_link_libraries(clfortran ${OpenCL_LIBRARIES})
 
 target_include_directories(clfortran PUBLIC ${OpenCL_INCLUDE_DIRS}
                                      PRIVATE ${CLFortranProj_BINARY_DIR})
+set_target_properties (clfortran
+              PROPERTIES
+              OUTPUT_NAME clfortran
+#              PREFIX lib
+#              VERSION ${VERSION}
+              ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+              Fortran_MODULE_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR} 
+              Fortran_MODULE_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}
+              DEBUG_POSTFIX ${DEBUG_EXTENSION} )
+
 
 if(MSVC_IDE OR XCODE)
   set(MOD_PATH "\${CMAKE_INSTALL_CONFIG_NAME}")
