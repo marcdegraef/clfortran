@@ -1,5 +1,4 @@
-include("${CMAKE_CURRENT_LIST_DIR}/CLFortranLibTargets.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/CLFortranLibHDFTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/CLFortranTargets.cmake")
 
 set(CLFortran_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../../../include")
 
