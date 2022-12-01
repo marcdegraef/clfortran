@@ -62,7 +62,7 @@ set(fotrancl_SRCS
 )
 
 
-add_library(clfortran STATIC ${fotrancl_SRCS} )
+add_library(clfortran SHARED ${fotrancl_SRCS} )
 target_link_libraries(clfortran ${OpenCL_LIBRARIES})
 
 target_include_directories(clfortran PUBLIC ${OpenCL_INCLUDE_DIRS}
